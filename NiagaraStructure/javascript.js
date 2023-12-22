@@ -10,14 +10,24 @@ function loadData() {
     if (csvText.length == 0) {
         //Load file input
         csvText = 'fromFile';
-        //Proceed with validation as text
-        testResult = validateCsvText(csvText);
-        if (testResult.valid) {
-            //Proceed with visualization
-            generateVisualization(testResult.data);
+        files = fileInputElem.files;
+        if (files[0]) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const csvText = reader.result;
+                //Proceed with validation as text
+                testResult = validateCsvText(csvText);
+                if (testResult.valid) {
+                    //Proceed with visualization
+                    generateVisualization(testResult.data);
+                } else {
+                    //Specify error
+                    alert(`CSV failed validation due to:\n${testResult.cause}`);
+                }
+            }
+            reader.readAsText(files[0]);
         } else {
-            //Specify error
-            alert(`CSV failed validation due to:\n${testResult.cause}`);
+            alert('No CSV data was uploaded as a file or as text!')
         }
     } else {
         //Proceed with text validation
@@ -39,7 +49,7 @@ function validateCsvText(textIn) {
         "rowSplit": "\n",
         "colSplit": ","
     }
-    if (textIn.indexOf(validationParameters.expHeaders) == 0) {
+    if (/*textIn.indexOf(validationParameters.expHeaders) == 0*/true) {
         //Found Expected Headers
 
         //Perform splits to get 2d array from csv string
@@ -148,6 +158,7 @@ function generateVisualization(data) {
         "enum": "#fbb040",
         "numeric": "#b78fc7",
         "device": "#294791",
+        "station": "#294791",
         "network": "#2fb9e4",
         "folder": "#e2e2e2"
     }
@@ -158,7 +169,6 @@ function generateVisualization(data) {
                 color = typeLookups[typePiece];
             }
         }
-        console.log(color);
         colorsArr.push(color);
     })
     const vizData = [{
@@ -166,8 +176,18 @@ function generateVisualization(data) {
         ids: idsArr,
         labels: labelsArr,
         parents: parentsArr,
-        marker: {colors: colorsArr}
+        marker: { colors: colorsArr },
+        //maxdepth: 3
     }];
     var layoutCfg = {};
-    Plotly.newPlot('finalChart', vizData, layoutCfg);
+    var otherCfg = {
+        toImageButtonOptions: {
+            format: 'svg',
+            filename: 'StationStructure',
+            height: 5000,
+            width: 7000,
+            scale: 0.5
+        }
+    };
+    Plotly.newPlot('finalChart', vizData, layoutCfg, otherCfg);
 }
