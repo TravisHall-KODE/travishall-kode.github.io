@@ -177,6 +177,7 @@ function generateVisualization(data) {
         labels: labelsArr,
         parents: parentsArr,
         marker: { colors: colorsArr },
+        text: typesArr,
         //maxdepth: 3
     }];
     var layoutCfg = {};
