@@ -49,7 +49,7 @@ function validateCsvText(textIn) {
         "rowSplit": "\n",
         "colSplit": ","
     }
-    if (/*textIn.indexOf(validationParameters.expHeaders) == 0*/true) {
+    if (textIn.indexOf(validationParameters.expHeaders) == 0) {
         //Found Expected Headers
 
         //Perform splits to get 2d array from csv string
