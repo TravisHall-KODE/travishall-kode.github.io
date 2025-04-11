@@ -1,9 +1,68 @@
-.abstract {
-    background-color:bisque
+.abstract,
+.canonical,
+.field,
+.virtual,
+.uses,
+.implements,
+.applies,
+.opt_uses {
+    text-rendering: optimizeLegibility;
+    margin: 0;
+    letter-spacing: initial;
+    text-decoration: none;
+    outline-style: solid;
+    outline-color: #000000dd;
+    outline-width: 1px;
+    box-sizing: content-box;
+    text-align: left;
+    gap: 10px;
+    width:auto;
+    padding: 20px;
+    border-radius: 1.2rem;
+    cursor: pointer;
+    order: 0;
+    list-style-type: none;
 }
+
 .canonical {
-    background-color:burlywood
+    background-color: #e3d78f;
+    width: 1000px
 }
+
+.abstract,
+.virtual {
+    background-color: #c2d58a
+}
+
 .field {
-    background-color:lightsalmon
+    background-color: #94c788;
+    padding: 5px;
+    margin: 0
+}
+
+.uses,
+.implements {
+    background-color: #c79d7b
+}
+
+.opt_uses,
+.applies {
+    background-color: #d5b682
+}
+
+.name {
+    color: rgba(58, 58, 58, 100%);
+    font: normal 16pt roboto, "Helvetica Neue", sans-serif;
+}
+
+.subName {
+    color: rgba(78, 78, 78, 100%);
+    font: normal 12pt roboto, "Helvetica Neue", sans-serif;
+    padding-bottom: 6px;
+}
+
+.description {
+    color: rgba(78, 78, 78, 100%);
+    font: normal 10pt roboto, "Helvetica Neue", sans-serif;
+    padding-bottom: 6px;
 }

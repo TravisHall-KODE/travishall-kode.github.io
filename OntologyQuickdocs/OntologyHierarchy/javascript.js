@@ -34,7 +34,6 @@ for (key in ont) {
 //Now that we have the ontology data reformatted to fit our needs, we can recursively crawl it in a similar way to build out our HTML elements
 
 function crawlTreeHtml(entity, parentElemId) {
-    console.log(parentElemId);
     const entElem = document.createElement('li');
     entElem.setAttribute('class', `${entity.type}`);
     entElem.setAttribute('id', `${parentElemId}-${entity.name}`);
@@ -56,7 +55,7 @@ function crawlTreeHtml(entity, parentElemId) {
         entity.uses.forEach(use => {
             const fieldElem = document.createElement('li');
             fieldElem.setAttribute('id', `${parentElemId}-${entity.name}-u-${use}`);
-            fieldElem.setAttribute('class', 'field');
+            fieldElem.setAttribute('class', 'field name');
             fieldElem.innerHTML = use;
             usesUl.appendChild(fieldElem);
         })
@@ -72,7 +71,7 @@ function crawlTreeHtml(entity, parentElemId) {
         entity.opt_uses.forEach(opt_use => {
             const fieldElem = document.createElement('li');
             fieldElem.setAttribute('id', `${parentElemId}-${entity.name}-u-${opt_use}`);
-            fieldElem.setAttribute('class', 'field');
+            fieldElem.setAttribute('class', 'field name');
             fieldElem.innerHTML = opt_use;
             opt_usesUl.appendChild(fieldElem);
         })
@@ -105,7 +104,6 @@ function crawlTreeHtml(entity, parentElemId) {
     return entElem;
 }
 const treeRoot = document.getElementById('treeContainer');
-console.log(treeRoot);
 for (key in ontTree) {
     treeRoot.appendChild(crawlTreeHtml(ontTree[key], 'treeContainer'));
 }
