@@ -7,7 +7,7 @@
 .applies,
 .opt_uses {
     text-rendering: optimizeLegibility;
-    margin: 0;
+    margin: 0px;
     letter-spacing: initial;
     text-decoration: none;
     outline-style: solid;
@@ -17,8 +17,9 @@
     text-align: left;
     gap: 10px;
     width:auto;
-    padding: 20px;
-    border-radius: 1.2rem;
+    padding: 5px;
+    padding-left: 50px;
+    border-radius: 5px;
     cursor: pointer;
     order: 0;
     list-style-type: none;
@@ -37,6 +38,7 @@
 .field {
     background-color: #94c788;
     padding: 5px;
+    padding-left: 10px;
     margin: 0
 }
 

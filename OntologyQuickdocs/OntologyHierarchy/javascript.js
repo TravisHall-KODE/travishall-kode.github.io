@@ -1,4 +1,19 @@
-//First, grab the basic ontology data and reformat it to work more easily with a hierarchy view, including duplicating abstracts/fields where appropriate
+//First, check for URL parameters for the quick, UI-less filtering implementation
+const expectedParams = {
+    "canonicalName": "vav",
+    "includeImplements": "true",
+    "includeVirtuals": "true"
+}
+const searchParams = new URLSearchParams(window.location.search);
+for (key in expectedParams) {
+    if (searchParams.has(key)) {
+        expectedParams[key] = searchParams.get(key);
+    }
+}
+
+console.log(expectedParams);
+
+//Next, grab the basic ontology data and reformat it to work more easily with a hierarchy view, including duplicating abstracts/fields where appropriate
 //We do this by finding each canonical type, then recursively traversing down the entire tree over all implemented/applied abstracts.
 const ontTree = {};
 function crawlTreeData(entity) {
@@ -13,33 +28,38 @@ function crawlTreeData(entity) {
         'implements': [],
         'applies': []
     }
-    entity.implements.forEach(impEnt => {
-        thisEntFormatted.implements.push(
-            crawlTreeData(ont[impEnt])
-        );
-    })
+    if (expectedParams.includeImplements == 'true') {
+        entity.implements.forEach(impEnt => {
+            if (expectedParams.includeVirtuals == 'true' || ont[impEnt].type != 'virtual') {
+                thisEntFormatted.implements.push(
+                    crawlTreeData(ont[impEnt])
+                );
+            }
+        })
+    }
     entity.applies.forEach(appEnt => {
-        thisEntFormatted.applies.push(
-            crawlTreeData(ont[appEnt])
-        );
+        if (expectedParams.includeVirtuals == 'true' || ont[appEnt].type != 'virtual') {
+            thisEntFormatted.applies.push(
+                crawlTreeData(ont[appEnt])
+            );
+        }
     });
     return thisEntFormatted;
 }
 for (key in ont) {
-    if (ont[key].type == 'canonical') {
+    if (ont[key].type == 'canonical' && expectedParams.canonicalName == ont[key].name) {
         ontTree[key] = crawlTreeData(ont[key]);
     }
 }
 
 //Now that we have the ontology data reformatted to fit our needs, we can recursively crawl it in a similar way to build out our HTML elements
-
 function crawlTreeHtml(entity, parentElemId) {
     const entElem = document.createElement('li');
     entElem.setAttribute('class', `${entity.type}`);
     entElem.setAttribute('id', `${parentElemId}-${entity.name}`);
     const nameElem = document.createElement('div');
     nameElem.setAttribute('class', 'name');
-    nameElem.innerHTML = entity.name;
+    nameElem.innerHTML = `${entity.name} (${entity.type})`;
     entElem.appendChild(nameElem);
     const descElem = document.createElement('div');
     descElem.setAttribute('class', 'description');
