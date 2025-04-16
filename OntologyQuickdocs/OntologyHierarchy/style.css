@@ -26,17 +26,17 @@
 }
 
 .canonical {
-    background-color: #e3d78f;
+    background-color: #a9bebc;
     width: 1000px
 }
 
 .abstract,
 .virtual {
-    background-color: #c2d58a
+    background-color: #c7b3b5
 }
 
 .field {
-    background-color: #94c788;
+    background-color: #f1f1f1;
     padding: 5px;
     padding-left: 10px;
     margin: 0
@@ -44,12 +44,12 @@
 
 .uses,
 .implements {
-    background-color: #c79d7b
+    background-color: #d8d6c5
 }
 
 .opt_uses,
 .applies {
-    background-color: #d5b682
+    background-color: #d2d4e1
 }
 
 .name {

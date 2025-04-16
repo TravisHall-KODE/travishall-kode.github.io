@@ -1,6 +1,6 @@
 //First, check for URL parameters for the quick, UI-less filtering implementation
 const expectedParams = {
-    "canonicalName": "vav",
+    "canonicalName": "",
     "includeImplements": "true",
     "includeVirtuals": "true"
 }
@@ -47,7 +47,7 @@ function crawlTreeData(entity) {
     return thisEntFormatted;
 }
 for (key in ont) {
-    if (ont[key].type == 'canonical' && expectedParams.canonicalName == ont[key].name) {
+    if (ont[key].type == 'canonical' && (expectedParams.canonicalName == ont[key].name || expectedParams.canonicalName == "")) {
         ontTree[key] = crawlTreeData(ont[key]);
     }
 }
