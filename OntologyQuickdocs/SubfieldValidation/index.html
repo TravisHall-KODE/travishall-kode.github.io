@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.cyan.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css">
+    <script src="resources/ont.js"></script>
+    <script src="resources/sfs.js"></script>
+    <style>
+        :root {
+            --pico-font-size: 90%
+        }
+
+        [data-tooltip]::before {
+            max-width: max(100%, 15rem);
+            width: max-content;
+            white-space: initial;
+            text-indent: 0;
+        }
+    </style>
+    <title>KODE OS Subfield Validator</title>
+</head>
+
+<body>
+    <main class="container">
+        <br/><br/><br/><br/>
+        <button id="validationResult" data-html="true" data-tooltip="placeholder" data-placement="right"
+            class="result pico-background-pink-600">placeholder</button>
+        <hr />
+        <fieldset id="subfieldTypes">
+        </fieldset>
+    </main>
+    <script src="javascript.js"></script>
+</body>
+
+</html>
